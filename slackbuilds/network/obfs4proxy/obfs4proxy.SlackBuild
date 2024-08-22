@@ -68,18 +68,21 @@ go build -o obfs4proxy/obfs4proxy ./obfs4proxy
 
 mkdir -p $PKG/usr/bin \
   $PKG/var/{log,run}/$PRGNAM \
-  $PKG/usr/share/man/man1 \
+  $PKG/usr/man/man1 \
   $PKG/usr/doc/$PRGNAM-$VERSION
 
 install -D -m 0755 $TMP/$PRGNAM-$VERSION/$PRGNAM/$PRGNAM $PKG/usr/bin/$PRGNAM
+
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 cp -a ChangeLog LICENSE LICENSE-GPL3.txt \
   $PKG/usr/doc/$PRGNAM-$VERSION/
 
 cp -a doc/obfs4proxy.1 \
-  $PKG/usr/share/man/man1
+  $PKG/usr/man/man1
 
-find $PKG/usr/share/man/man1 -iname obfs4proxy.1 -exec gzip -9 {} \;
+find $PKG/usr/man/man1 -iname obfs4proxy.1 -exec gzip -9 {} \;
 for i in $( find $PKG/doc -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
 cat $CWD/README > $PKG/usr/doc/$PRGNAM-$VERSION/README
