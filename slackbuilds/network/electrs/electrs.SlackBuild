@@ -50,8 +50,10 @@ fi
 
 if [ "$ARCH" = "x86_64" ]; then
   export LIBDIRSUFFIX="64"
+elif [ "$ARCH" = "arm64" ] || [ "$ARCH" = "aarch64" ]; then
+ export LIBDIRSUFFIX="64"
 else
- export LIBDIRSUFFIX=""
+  export LIBDIRSUFFIX=""
 fi
 
 export PATH="/opt/rust16/bin:$PATH"
@@ -97,7 +99,7 @@ find -L . \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
-
+echo $LIBDIRSUFFIX
 cargo build --locked --release
 strip target/release/electrs
 
