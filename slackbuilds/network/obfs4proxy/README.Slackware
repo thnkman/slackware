@@ -1,9 +1,7 @@
 # Client side torrc configuration:
-
 ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy
 
 # Bridge side torrc configuration:
-
 # Act as a bridge relay.
 BridgeRelay 1
 
