@@ -1,4 +1,4 @@
-This is a protocol obfuscation layer for TCP protocols.  Its purpose is
+This is a protocol obfuscation layer for TCP protocols. Its purpose is
 to keep a third party from telling what protocol is in use based on
 message contents.
 
