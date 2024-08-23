@@ -48,6 +48,12 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
+if [ "$ARCH" = "x86_64" ]; then
+  export LIBDIRSUFFIX="64"
+else
+ export LIBDIRSUFFIX=""
+fi
+
 export PATH="/opt/rust16/bin:$PATH"
 if [ -z "$LD_LIBRARY_PATH" ]; then
   export LD_LIBRARY_PATH="/opt/rust16/lib$LIBDIRSUFFIX"
